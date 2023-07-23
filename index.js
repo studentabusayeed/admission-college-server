@@ -29,7 +29,10 @@ async function run() {
         const reviewCollection = client.db('admissionTo').collection('review');
 
         app.get('/student', async (req, res) => {
-            const cursor = studentCollection.find();
+            const email = req.query.email;
+            const filter = {email: email};
+            console.log(email);
+            const cursor = studentCollection.find(filter);
             const result = await cursor.toArray();
             res.send(result);
         });
